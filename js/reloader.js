@@ -5,7 +5,7 @@ function reload(mod, on_load, args="")
     //create XMLHttpRequest object
     const xhr = new XMLHttpRequest();
     //open a get request with the remote server URL
-    xhr.open("GET", "../../SuckMyLegApis/"+mod+"/index.php?"+args);
+    xhr.open("GET", "http://localhost:4500/SuckMyLegApis/"+mod+"/?"+args);
     //send the Http request
     xhr.send();
 
