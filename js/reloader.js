@@ -1,6 +1,6 @@
 
 // https://livecodestream.dev/post/5-ways-to-make-http-requests-in-javascript/
-function call(mod, on_load, args="")
+function make_call(mod, args="")
 {
     //create XMLHttpRequest object
     const xhr = new XMLHttpRequest();
