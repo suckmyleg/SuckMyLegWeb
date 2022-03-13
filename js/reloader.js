@@ -1,6 +1,6 @@
 
 // https://livecodestream.dev/post/5-ways-to-make-http-requests-in-javascript/
-function make_call_str(mod, fun, args="")
+function make_call_str(mod, on_load, args="")
 {
     //create XMLHttpRequest object
     const xhr = new XMLHttpRequest();
@@ -15,17 +15,17 @@ function make_call_str(mod, fun, args="")
     xhr.onload = function() {
       if (xhr.status === 200) {
         data = xhr.responseText
-        fun(data);
+        on_load(data);
       } else if (xhr.status === 404) {
         console.log("No records found");
-        fun("404");
+        on_load("404");
       }
     }
 
     //triggered when a network-level error occurs with the request
     xhr.onerror = function() {
       console.log("Network error occurred");
-      fun("Network error ocurred");
+      on_load("Network error ocurred");
     }
 
     //triggered periodically as the client receives data
