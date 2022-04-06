@@ -4,12 +4,16 @@ version="0.0.1"
 
 host="http://www.suckmyleg.ddns.net:4500/SuckMyLegApis/HoneygainWorkers?"
 
-newversion=$(wget $host"command=version&devicename=${devicename}&time=${time}&ip=${ip}" -q -O -)
+time="%s"
+
+user=$(whoami)
+
+newversion=$(wget $host"command=version&devicename=${user}&time=${time}&ip=${ip}" -q -O -)
 
 if [ $newversion = $version ]; then
-	user=$(whoami)
+	time="%s"
 
-	account_data=$(wget $host"command=login&devicename=${devicename}&time=${time}&ip=${ip}" -q -O -)
+	account_data=$(wget $host"command=login&devicename=${user}&time=${time}&ip=${ip}" -q -O -)
 
 	email=no
 
