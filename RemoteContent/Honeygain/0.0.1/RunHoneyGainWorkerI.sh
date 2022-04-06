@@ -19,7 +19,8 @@ if [ $newversion = $version ]; then
 
 	password=no
 
-	for line in $account_data:
+	for line in $account_data;
+	do
 		if [ $line = 0 ]; then
 			echo "Banned"
 			exit N
@@ -44,6 +45,7 @@ if [ $newversion = $version ]; then
 		else
 			password=$line
 		fi
+	done
 
 	docker run honeygain/honeygain -tou-accept -email "$email" -pass "$password" -device "$user"
 else
