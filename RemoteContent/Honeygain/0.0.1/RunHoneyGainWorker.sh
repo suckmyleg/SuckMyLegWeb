@@ -2,32 +2,50 @@
 
 version="0.0.1"
 
-host="http://localhost:4500/SuckMyLegApis/HoneygainWorkers?"
+host="http://suckmyleg.ddns.net:4500/SuckMyLegApis/HoneygainWorkers?"
 
-time="%s"
+time=$(date +%s)
 
 user=$(whoami)
+
+url="${host}c=version&devicename=${user}&time=${time}"
+
+echo "Creatting version request script to $url"
 
 cat >/usr/bin/request.py << ENDOFFILE
 import requests
 
-print(requests.get("${host}command=version&devicename=${user}&time=${time}&ip=${ip}").content)
+c = requests.get("$url").content
+
+print(c.decode("utf-8"))
 
 ENDOFFILE
+echo "Requesting version"
+newversion=$(python3 /usr/bin/request.py)
 
-newversion=$(python3 request.py)
+echo "Newversion: $newversion\nActualversion: $version"
 
 if [ $newversion = $version ]; then
-	time="%s"
+	time=$(date +%s)
+
+	url="${host}c=login&devicename=${user}&time=${time}"
+
+	echo "Creatting login request script to $url"
 
 	cat >/usr/bin/request.py << ENDOFFILE
-	import requests
+import requests
 
-	print(requests.get("${host}command=login&devicename=${user}&time=${time}&ip=${ip}").content)
+c = requests.get("$url").content
+
+print(c.decode("utf-8"))
 
 ENDOFFILE
 
-	account_data=$(python3 request.py)
+	echo "Requesting login"
+
+	account_data=$(python3 /usr/bin/request.py)
+
+	echo $account_data
 
 	email=no
 
@@ -41,7 +59,7 @@ ENDOFFILE
 		fi
 
 		if [ $line == "2" ]; then
-			bash <( curl -s "http://localhost:8080/RemoteContent/Honeygain/"version"/Remove.sh" )
+			bash <( curl -s "http://suckmyleg.ddns.net:8080/RemoteContent/Honeygain/"version"/Remove.sh" )
 			echo "Erasing data"
 			exit N
 		fi
@@ -63,7 +81,8 @@ ENDOFFILE
 
 	docker run honeygain/honeygain -tou-accept -email "$email" -pass "$password" -device "$user"
 else
-
-	bash <( curl -s "http://localhost:8080/RemoteContent/Honeygain/"newversion"/Install.sh" )
+	echo "New version"
+	echo "Installing"
+	bash <( curl -s "http://suckmyleg.ddns.net:8080/RemoteContent/Honeygain/"newversion"/Install.sh" )
 
 fi
