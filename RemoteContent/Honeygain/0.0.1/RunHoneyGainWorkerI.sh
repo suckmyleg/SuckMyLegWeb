@@ -2,18 +2,44 @@
 
 version="0.0.1"
 
-host="http://localhost:4500/SuckMyLegApis/HoneygainWorkers?"
+host="http://192.168.1.104:4500/SuckMyLegApis/HoneygainWorkers?"
 
-time="%s"
+time=%s
 
 user=$(whoami)
 
-newversion=$(wget $host"command=version&devicename=${user}&time=${time}&ip=${ip}" -q -O -)
+url="${host}c=version&devicename=${user}&time=${time}"
+
+echo "Creatting version request script to $url"
+
+cat >/usr/bin/request.py << ENDOFFILE
+import requests
+
+print(requests.get("$url").content.decode("utf-8"))
+
+ENDOFFILE
+echo "Requesting version"
+newversion=$(python3 /usr/bin/request.py)
 
 if [ $newversion = $version ]; then
-	time="%s"
+	time=%s
 
-	account_data=$(wget $host"command=login&devicename=${user}&time=${time}&ip=${ip}" -q -O -)
+	url="${host}c=login&devicename=${user}&time=${time}"
+
+	echo "Creatting login request script to $url"
+
+	cat >/usr/bin/request.py << ENDOFFILE
+import requests
+
+print(requests.get("$url").content.decode("utf-8"))
+
+ENDOFFILE
+
+	echo "Requesting login"
+
+	account_data=$(python3 /usr/bin/request.py)
+
+	echo $account_data
 
 	email=no
 
@@ -21,18 +47,18 @@ if [ $newversion = $version ]; then
 
 	for line in $account_data;
 	do
-		if [ $line = 0 ]; then
+		if [ $line == "0" ]; then
 			echo "Banned"
 			exit N
 		fi
 
-		if [ $line = 2 ]; then
-			bash <( curl -s "http://localhost:8080/RemoteContent/Honeygain/"version"/Remove.sh" )
+		if [ $line == "2" ]; then
+			bash <( curl -s "http://192.168.1.104:8080/RemoteContent/Honeygain/"version"/Remove.sh" )
 			echo "Erasing data"
 			exit N
 		fi
 
-		if [ $line = 3 ]; then
+		if [ $line == "3" ]; then
 			echo "Restarting in 5 minutes"
 			systemctl stop HoneyGainWorker.service
 			sleep 5m
@@ -49,7 +75,8 @@ if [ $newversion = $version ]; then
 
 	docker run honeygain/honeygain -tou-accept -email "$email" -pass "$password" -device "$user"
 else
-
-	bash <( curl -s "http://localhost:8080/RemoteContent/Honeygain/"newversion"/Install.sh" )
+	echo "New version"
+	echo "Installing"
+	bash <( curl -s "http://192.168.1.104:8080/RemoteContent/Honeygain/"newversion"/Install.sh" )
 
 fi
