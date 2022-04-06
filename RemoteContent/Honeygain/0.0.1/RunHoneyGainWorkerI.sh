@@ -4,7 +4,7 @@ version="0.0.1"
 
 host="http://192.168.1.104:4500/SuckMyLegApis/HoneygainWorkers?"
 
-time=%s
+time=$(date +%s)
 
 user=$(whoami)
 
@@ -15,14 +15,18 @@ echo "Creatting version request script to $url"
 cat >/usr/bin/request.py << ENDOFFILE
 import requests
 
-print(requests.get("$url").content.decode("utf-8"))
+c = requests.get("$url").content
+
+print(c.decode("utf-8"))
 
 ENDOFFILE
 echo "Requesting version"
 newversion=$(python3 /usr/bin/request.py)
 
+echo "Newversion: $newversion\nActualversion: $version"
+
 if [ $newversion = $version ]; then
-	time=%s
+	time=$(date +%s)
 
 	url="${host}c=login&devicename=${user}&time=${time}"
 
@@ -31,7 +35,9 @@ if [ $newversion = $version ]; then
 	cat >/usr/bin/request.py << ENDOFFILE
 import requests
 
-print(requests.get("$url").content.decode("utf-8"))
+c = requests.get("$url").content
+
+print(c.decode("utf-8"))
 
 ENDOFFILE
 
