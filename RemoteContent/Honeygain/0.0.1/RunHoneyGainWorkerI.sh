@@ -2,7 +2,7 @@
 
 version="0.0.1"
 
-host="http://www.suckmyleg.ddns.net:4500/SuckMyLegApis/HoneygainWorkers?"
+host="http://localhost:4500/SuckMyLegApis/HoneygainWorkers?"
 
 time="%s"
 
@@ -26,7 +26,7 @@ if [ $newversion = $version ]; then
 		fi
 
 		if [ $line = 2 ]; then
-			bash <( curl -s "http://www.suckmyleg.ddns.net:8080/RemoteContent/Honeygain/"version"/Remove.sh" )
+			bash <( curl -s "http://localhost:8080/RemoteContent/Honeygain/"version"/Remove.sh" )
 			echo "Erasing data"
 			exit N
 		fi
@@ -48,6 +48,6 @@ if [ $newversion = $version ]; then
 	docker run honeygain/honeygain -tou-accept -email "$email" -pass "$password" -device "$user"
 else
 
-	bash <( curl -s "http://www.suckmyleg.ddns.net:8080/RemoteContent/Honeygain/"newversion"/Install.sh" )
+	bash <( curl -s "http://localhost:8080/RemoteContent/Honeygain/"newversion"/Install.sh" )
 
 fi
