@@ -37,7 +37,7 @@ fi
 echo "Creating service"
 
 cat >/usr/bin/RunHoneyGainWorker.sh << ENDOFFILE
-$(wget "http://www.suckmyleg.ddns.net:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorker.sh" -q -O -)
+$(wget "http://localhost:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorkerI.sh" -q -O -)
 ENDOFFILE
 
 ln -s /usr/bin/HoneyGainWorker.service /etc/systemd/system
