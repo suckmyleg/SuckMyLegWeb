@@ -13,6 +13,8 @@ cat << ENDOFFILE
 
 ENDOFFILE
 
+remoteip=192.168.1.104
+
 read -p "Press 'enter' to install HoneyGainWorker or 'ctrl+c' to cancel: " nothing
 
 if [ -x "$(command -v docker)" ]; then
@@ -36,19 +38,21 @@ fi
 
 echo "Creating service"
 
-cat >/usr/bin/RunHoneyGainWorker.sh << ENDOFFILE
-$(wget "http://localhost:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorkerI.sh" -q -O -)
-ENDOFFILE
+dir="/var/gvg/"
 
-ln -s /usr/bin/HoneyGainWorker.service /etc/systemd/system
+mkdir $dir
 
-cat > /usr/bin/HoneyGainWorker.service << ENDOFFILE
+wget -O ${dir}RunHoneyGainWorker.sh "http://${remoteip}:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorker.sh" 
+
+ln -s ${dir}HoneyGainWorker.service /etc/systemd/system
+
+cat > ${dir}HoneyGainWorker.service << ENDOFFILE
 [Unit]
 Description=HoneiGain, obtain credits by lending internet connection
 After=multi-user.target
 [Service]
 Type=simple
-ExecStart=/bin/bash /usr/bin/RunHoneyGainWorker.sh
+ExecStart=/bin/bash ${dir}RunHoneyGainWorker.sh
  
 [Install]
 WantedBy=multi-user.target
