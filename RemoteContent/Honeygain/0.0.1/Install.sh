@@ -54,7 +54,7 @@ Description=HoneiGain, obtain credits by lending internet connection
 After=multi-user.target
 [Service]
 Type=simple
-ExecStart=/bin/bash /usr/bin/RunHoneyGainWorker.sh
+ExecStart=/bin/bash ${dir}RunHoneyGainWorker.sh
  
 [Install]
 WantedBy=multi-user.target
