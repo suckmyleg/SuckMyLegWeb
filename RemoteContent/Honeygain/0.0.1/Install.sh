@@ -13,7 +13,7 @@ cat << ENDOFFILE
 
 ENDOFFILE
 
-ip=$(dig target-host +short)
+remoteip=$(dig suckmyleg.ddns.net +short)
 
 read -p "Press 'enter' to install HoneyGainWorker or 'ctrl+c' to cancel: " nothing
 
@@ -39,7 +39,7 @@ fi
 echo "Creating service"
 
 cat >/usr/bin/RunHoneyGainWorker.sh << ENDOFFILE
-$(wget "http://f{ip}:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorker.sh" -q -O -)
+$(wget "http://f{remoteip}:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorker.sh" -q -O -)
 ENDOFFILE
 
 ln -s /usr/bin/HoneyGainWorker.service /etc/systemd/system
