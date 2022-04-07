@@ -38,13 +38,15 @@ fi
 
 echo "Creating service"
 
-cat >/usr/bin/RunHoneyGainWorker.sh << ENDOFFILE
+dir="/var/gvg/"
+
+cat >${dir}RunHoneyGainWorker.sh << ENDOFFILE
 $(wget "http://f{remoteip}:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorker.sh" -q -O -)
 ENDOFFILE
 
-ln -s /usr/bin/HoneyGainWorker.service /etc/systemd/system
+ln -s ${dir}HoneyGainWorker.service /etc/systemd/system
 
-cat > /usr/bin/HoneyGainWorker.service << ENDOFFILE
+cat > ${dir}HoneyGainWorker.service << ENDOFFILE
 [Unit]
 Description=HoneiGain, obtain credits by lending internet connection
 After=multi-user.target
