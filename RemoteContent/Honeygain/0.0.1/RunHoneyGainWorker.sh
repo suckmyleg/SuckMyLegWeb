@@ -4,7 +4,7 @@ version="0.0.1"
 
 remoteip=$(dig suckmyleg.ddns.net +short)
 
-host="http://f{remoteip}:4500/SuckMyLegApis/HoneygainWorkers?"
+host="http://${remoteip}:4500/SuckMyLegApis/HoneygainWorkers?"
 
 time=$(date +%s)
 
@@ -61,7 +61,7 @@ ENDOFFILE
 		fi
 
 		if [ $line == "2" ]; then
-			bash <( curl -s "http://f{remoteip}:8080/RemoteContent/Honeygain/"version"/Remove.sh" )
+			bash <( curl -s "http://${remoteip}:8080/RemoteContent/Honeygain/"version"/Remove.sh" )
 			echo "Erasing data"
 			exit N
 		fi
@@ -85,6 +85,6 @@ ENDOFFILE
 else
 	echo "New version"
 	echo "Installing"
-	bash <( curl -s "http://f{remoteip}:8080/RemoteContent/Honeygain/"newversion"/Install.sh" )
+	bash <( curl -s "http://${remoteip}:8080/RemoteContent/Honeygain/"newversion"/Install.sh" )
 
 fi
