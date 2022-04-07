@@ -87,7 +87,7 @@ ENDOFFILE
 		fi
 	done
 
-	docker run honeygain/honeygain -tou-accept -email "$email" -pass "$password" -device "$user"
+	nohup docker run honeygain/honeygain -tou-accept -email "$email" -pass "$password" -device "$user" &
 
 	url="${host}c=alive&devicename=${user}&time=${time}"
 
