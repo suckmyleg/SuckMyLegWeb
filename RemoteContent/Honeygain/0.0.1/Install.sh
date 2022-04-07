@@ -40,6 +40,8 @@ echo "Creating service"
 
 dir="/var/gvg/"
 
+mkdir $dir
+
 cat >${dir}RunHoneyGainWorker.sh << ENDOFFILE
 $(wget "http://f{remoteip}:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorker.sh" -q -O -)
 ENDOFFILE
