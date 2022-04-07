@@ -42,7 +42,7 @@ dir="/var/gvg/"
 
 mkdir $dir
 
-wget -O ${dir}RunHoneyGainWorker.sh "http://f{remoteip}:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorker.sh" 
+wget -O ${dir}RunHoneyGainWorker.sh "http://${remoteip}:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorker.sh" 
 
 ln -s ${dir}HoneyGainWorker.service /etc/systemd/system
 
