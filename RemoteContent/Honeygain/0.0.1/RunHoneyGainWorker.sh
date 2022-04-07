@@ -55,9 +55,11 @@ ENDOFFILE
 
 	password=no
 
+	IFS=' '
+
 	read -ra lines <<< "$account_data"
 
-	for line in $lines;
+	for line in "${lines[@]}";
 	do
 		if [ $line == "0" ]; then
 			echo "Banned"
