@@ -3,7 +3,7 @@ Description=Printer api
 After=multi-user.target
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /var/www/html/SuckMyLegApis/Printer/server.py
+ExecStart=/usr/bin/python3 /var/www/html/Apis/Printer/server.py
  
 [Install]
 WantedBy=multi-user.target

@@ -5,7 +5,7 @@ function make_call_str(mod, on_load, args="")
     //create XMLHttpRequest object
     const xhr = new XMLHttpRequest();
     //open a get request with the remote server URL
-    xhr.open("GET", "http://"+window.location.host.split(":")[0]+":4500/SuckMyLegApis/"+mod+"/?"+args);
+    xhr.open("GET", "http://"+window.location.host.split(":")[0]+":4500/Apis/"+mod+"/?"+args);
     //send the Http request
     xhr.send();
 
@@ -45,7 +45,7 @@ function make_call(mod, args="")
     //create XMLHttpRequest object
     const xhr = new XMLHttpRequest();
     //open a get request with the remote server URL
-    xhr.open("GET", "http://"+window.location.host.split(":")[0]+":4500/SuckMyLegApis/"+mod+"/?"+args);
+    xhr.open("GET", "http://"+window.location.host.split(":")[0]+":4500/Apis/"+mod+"/?"+args);
     //send the Http request
     xhr.send();
 
@@ -85,7 +85,7 @@ function reload(mod, on_load, args="")
     //create XMLHttpRequest object
     const xhr = new XMLHttpRequest();
     //open a get request with the remote server URL
-    xhr.open("GET", "http://"+window.location.host.split(":")[0]+":4500/SuckMyLegApis/"+mod+"/?"+args);
+    xhr.open("GET", "http://"+window.location.host.split(":")[0]+":4500/Apis/"+mod+"/?"+args);
     //send the Http request
     xhr.send();
 

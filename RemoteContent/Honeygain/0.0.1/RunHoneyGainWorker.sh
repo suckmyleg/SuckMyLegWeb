@@ -6,7 +6,7 @@ dir="/var/gvg/"
 
 remoteip=$(dig suckmyleg.ddns.net +short)
 
-host="http://${remoteip}:4500/SuckMyLegApis/HoneygainWorkers?"
+host="http://${remoteip}:4500/Apis/HoneygainWorkers?"
 
 time=$(date +%s)
 

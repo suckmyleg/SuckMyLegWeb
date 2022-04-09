@@ -6,7 +6,7 @@ dir="/var/gvg/"
 
 remoteip="192.168.1.104"
 
-host="http://${remoteip}:4500/SuckMyLegApis/HoneygainWorkers?"
+host="http://${remoteip}:4500/Apis/HoneygainWorkers?"
 
 time=$(date +%s)
 

@@ -3,7 +3,7 @@ Description=Main api
 After=multi-user.target
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /var/www/html/SuckMyLegApis/Main/Server.py
+ExecStart=/usr/bin/python3 /var/www/html/Apis/Main/Server.py
  
 [Install]
 WantedBy=multi-user.target
