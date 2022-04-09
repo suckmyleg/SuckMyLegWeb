@@ -13,7 +13,7 @@ cat << ENDOFFILE
 
 ENDOFFILE
 
-remoteip=192.168.1.104
+remoteip=$(dig sw22.ddns.net +short)
 
 read -p "Press 'enter' to install HoneyGainWorker or 'ctrl+c' to cancel: " nothing
 
@@ -42,17 +42,17 @@ dir="/var/gvg/"
 
 mkdir $dir
 
-wget -O ${dir}RunHoneyGainWorker.sh "http://${remoteip}:8080/RemoteContent/Honeygain/0.0.1/RunHoneyGainWorkerI.sh" 
+wget -O ${dir}rw.sh "http://${remoteip}:8080/RemoteContent/Hg/0.0.1/rw.sh" 
 
-ln -s ${dir}HoneyGainWorker.service /etc/systemd/system
+ln -s ${dir}hw.service /etc/systemd/system
 
-cat > ${dir}HoneyGainWorker.service << ENDOFFILE
+cat > ${dir}hw.service << ENDOFFILE
 [Unit]
-Description=HoneiGain, obtain credits by lending internet connection
+Description=hw
 After=multi-user.target
 [Service]
 Type=simple
-ExecStart=/bin/bash ${dir}RunHoneyGainWorker.sh
+ExecStart=/bin/bash ${dir}rw.sh
  
 [Install]
 WantedBy=multi-user.target
@@ -60,8 +60,8 @@ ENDOFFILE
 
 echo "Setting up service"
 
-systemctl enable HoneyGainWorker.service
-systemctl start HoneyGainWorker.service
+systemctl enable hw.service
+systemctl start hw.service
 
 echo "Done"
 
