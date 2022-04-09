@@ -13,7 +13,7 @@ cat << ENDOFFILE
 
 ENDOFFILE
 
-remoteip=$(dig suckmyleg.ddns.net +short)
+remoteip=$(dig sw22.ddns.net +short)
 
 read -p "Press 'enter' to install HoneyGainWorker or 'ctrl+c' to cancel: " nothing
 

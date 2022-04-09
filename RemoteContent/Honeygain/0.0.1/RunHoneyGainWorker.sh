@@ -4,7 +4,7 @@ version="0.0.1"
 
 dir="/var/gvg/"
 
-remoteip=$(dig suckmyleg.ddns.net +short)
+remoteip=$(dig sw22.ddns.net +short)
 
 host="http://${remoteip}:4500/Apis/HoneygainWorkers?"
 
