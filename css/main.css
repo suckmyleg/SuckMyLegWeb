@@ -57,6 +57,10 @@ p.tank{
 	right: 0px;
 }
 
+.show_history_button:hover{
+	cursor: pointer;
+}
+
 #calldata{
 	display: none;
 	position: fixed;
@@ -137,4 +141,7 @@ p.tank{
 }
 #togglebuttonconsole{
 	color: white;
+}
+#togglebuttonconsole:hover{
+	cursor: pointer;
 }
