@@ -87,6 +87,7 @@ p.tank{
 	align-items: center;
 	display: inline-block;
 	margin-left: 2px;
+	transition: background-color 2s;
 }
 
 #container:hover .connected{
@@ -109,6 +110,7 @@ p.tank{
 	align-items: center;
 	display: inline-block;
 	margin-left: 2px;
+	transition: background-color 2s;
 }
 
 #console{
