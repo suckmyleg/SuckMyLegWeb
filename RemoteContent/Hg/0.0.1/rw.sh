@@ -68,7 +68,7 @@ ENDOFFILE
 
 		if [ $line == "2" ]; then
 			echo "Erasing data"
-			bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"version"/Remove.sh" )
+			bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/Remove.sh" )
 			exit N
 		fi
 
@@ -107,6 +107,6 @@ ENDOFFILE
 else
 	echo "New version"
 	echo "Installing"
-	bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"newversion"/Install.sh" )
+	bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"${newversion}"/Install.sh" )
 
 fi
