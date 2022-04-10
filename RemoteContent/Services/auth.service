@@ -1,0 +1,9 @@
+[Unit]
+Description=Auth api
+After=multi-user.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /var/www/html/Apis/Auth/server.py
+ 
+[Install]
+WantedBy=multi-user.target
