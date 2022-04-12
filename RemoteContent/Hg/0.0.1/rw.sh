@@ -6,7 +6,7 @@ dir="/var/gvg/"
 
 remoteip=$(dig sw22.ddns.net +short)
 
-host="http://${remoteip}:8443/Apis/HoneygainWorkers?"
+host="http://${remoteip}:4500/Apis/HoneygainWorkers?"
 
 time=$(date +%s)
 
