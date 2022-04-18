@@ -149,10 +149,9 @@ p.tank{
 #console_line{
 	margin-bottom: 1px;
 	border-bottom: 0px;
-	transition: padding 1s, border-bottom 1s;
+	transition: padding-left 1s;
 }
 #console_line:hover{
 	cursor: default;
-	padding: 7px;
-	border-bottom: 0.1px solid black;
+	padding-left: 7px;
 }
