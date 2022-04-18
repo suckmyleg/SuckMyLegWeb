@@ -162,3 +162,10 @@ p.tank{
 	cursor: default;
 	padding-left: 6px;
 }
+#line_number{
+	margin-right: 5px;
+}
+#line_number: hover{
+	border: 1px solid black;
+	border-radius: 10px;
+}
