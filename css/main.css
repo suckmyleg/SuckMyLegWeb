@@ -141,6 +141,7 @@ p.tank{
 }
 #togglebuttonconsole{
 	color: white;
+	display: inline-block;
 }
 #togglebuttonconsole:hover{
 	cursor: pointer;
@@ -149,9 +150,9 @@ p.tank{
 #console_line{
 	margin-bottom: 1px;
 	border-bottom: 0px;
-	transition: padding-left 1s;
+	transition: padding-left 10s;
 }
 #console_line:hover{
 	cursor: default;
-	padding-left: 7px;
+	padding-left: 6px;
 }
