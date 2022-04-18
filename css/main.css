@@ -151,7 +151,7 @@ p.tank{
 	cursor: pointer;
 	border: 1px solid white;
 	padding: 4px;
-	border-radius: 20%;
+	border-radius: 15%;
 }
 #console_line{
 	margin-bottom: 1px;
