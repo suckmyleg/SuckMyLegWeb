@@ -165,7 +165,7 @@ p.tank{
 #line_number{
 	margin-right: 5px;
 }
-#line_number: hover{
+#line_number:hover{
 	border: 1px solid black;
 	border-radius: 10px;
 }
