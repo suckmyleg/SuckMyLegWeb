@@ -147,7 +147,8 @@ p.tank{
 }
 #togglebuttonconsole:hover{
 	cursor: pointer;
-	border-bottom: 1px solid white;
+	border: 1px solid white;
+	padding: 4px;
 }
 #console_line{
 	margin-bottom: 1px;
