@@ -15,7 +15,7 @@ ENDOFFILE
 echo "Requesting version"
 newversion=$(python3 ${dir}request.py)
 echo "Newversion: $newversion\nActualversion: $version"
-if [ $newversion = $version ]; then
+if [ $newversion == $version ]; then
 	while :
 	do
 		time=$(date +%s)
