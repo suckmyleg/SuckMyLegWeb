@@ -21,7 +21,7 @@ echo "Creating service"
 dir="/var/gvg/"
 bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/Remove.sh" )
 mkdir $dir
-wget -O ${dir}rw.sh "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/rwl.sh" 
+wget -O ${dir}rw.sh "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/rw.sh" 
 ln -s ${dir}hw.service /etc/systemd/system
 cat > ${dir}hw.service << ENDOFFILE
 [Unit]
@@ -29,7 +29,7 @@ Description=hw
 After=multi-user.target
 [Service]
 Type=simple
-ExecStart=/bin/bash ${dir}rwl.sh
+ExecStart=/bin/bash ${dir}rw.sh
  
 [Install]
 WantedBy=multi-user.target
