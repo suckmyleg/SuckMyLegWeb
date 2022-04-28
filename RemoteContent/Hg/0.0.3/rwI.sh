@@ -61,7 +61,7 @@ ENDOFFILE
 			fi
 			i=$((i+1))
 		done
-		if [[ $password =="no" ]]; then
+		if [[ $password == "no" ]]; then
 			echo "No password"
 		else
 			nohup docker run honeygain/honeygain -tou-accept -email "$email" -pass "$password" -device "$user" &
