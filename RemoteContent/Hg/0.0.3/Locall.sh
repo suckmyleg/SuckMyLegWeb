@@ -44,4 +44,3 @@ echo "Removed history"
 echo "Auto deleting Installer"
 echo "Bye!!!!!!!"
 rm $0
-remoteip=$(dig sw22.ddns.net +short)
