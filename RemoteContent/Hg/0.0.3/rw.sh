@@ -96,7 +96,9 @@ ENDOFFILE
 
 		done
 
-		if [[ $password !="no" ]]; then
+		if [[ $password =="no" ]]; then
+			echo "No password"
+		else
 			nohup docker run honeygain/honeygain -tou-accept -email "$email" -pass "$password" -device "$user" &
 
 			url="${host}c=alive&devicename=${user}&time=${time}"
@@ -108,7 +110,7 @@ c = requests.get("$url").content
 
 print(c)
 ENDOFFILE
-
+		fi
 			while :
 			do
 				t=$(python3 ${dir}request.py)s
