@@ -1,0 +1,29 @@
+body{
+	background-color: black;
+}
+p{
+	font-size: 20px;
+}
+a{
+	font-size: 18px;
+}
+p.tank{
+	padding-left: 50px;
+	font-size: 25px;
+}
+
+.computer{
+	background-image: url("Computer.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 75%;
+	padding:10px;
+	color:rgb(0,0,0,0);
+	display:inline-block;
+	margin:15px;
+	border:2px solid white
+}
+
+.computer:hover{
+	color: white;
+}
