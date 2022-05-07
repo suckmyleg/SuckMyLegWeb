@@ -13,6 +13,7 @@ p.tank{
 }
 
 .computer{
+	cursor: pointer;
 	background-image: url("../Apps/Honey/Computer.png");
 	background-position: center;
 	background-repeat: no-repeat;
@@ -22,8 +23,10 @@ p.tank{
 	display:inline-block;
 	margin:15px;
 	border:2px solid white
+
 }
 
 .computer:hover{
+	opacity: 0.2;
 	color: white;
 }
