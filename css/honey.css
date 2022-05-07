@@ -27,6 +27,6 @@ p.tank{
 }
 
 .computer:hover{
-	opacity: 0.2;
+	background-image: none;
 	color: white;
 }
