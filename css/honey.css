@@ -13,7 +13,7 @@ p.tank{
 }
 
 .computer{
-	background-image: url("Computer.png");
+	background-image: url("../Apps/Honey/Computer.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 75%;
