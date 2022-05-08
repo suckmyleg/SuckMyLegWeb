@@ -1,0 +1,69 @@
+@font-face { font-family: Minecraft; src: url('../Fonts/minecraft.ttf'); }
+
+.player_container{
+	background-color: black;
+	border: 2px solid orange;
+    border-radius: 20px;
+	display: inline-block;
+	width: 150px;
+	margin-right: 20px;
+	margin-bottom:20px;
+	visibility: hidden;
+	transition:width 0s, background-color 1s, border-radius 5s, visibility 4s;
+	visibility: visible;
+	padding:5px;
+}
+
+.player_display{
+	display: inline-block;
+	width: 150px;
+}
+
+.player_name{
+	font-size: 30px;
+	font-family:Minecraft;
+	color: white;
+	transition: color 0.01s;
+}
+
+.player_name_container{
+	text-align: center;
+}
+
+.player_skin{
+	width: 50;
+	height:300px;
+}
+
+.hearts{
+    height:15px;
+}
+
+.player_container:hover{
+    background-color:orange;
+    width: 307px;
+    #margin-right:0px;
+    #padding-right:0px;
+}
+
+.player_estadistics{
+    color:black;
+    display: none;
+    visibility: hidden;
+    font-family:Minecraft;
+    transition: visibility 2s;
+    #border:1px solid black;
+    #border-radius:20px;
+    width: 150px;
+}
+
+.player_container:hover .player_name {
+    color:black;
+    padding-left:60%;
+}
+
+
+.player_container:hover .player_estadistics {
+    visibility: visible;
+    display: inline-block;
+}
