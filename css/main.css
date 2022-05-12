@@ -18,6 +18,7 @@ p.tank{
 	border-radius: 10px;
 	background-color:black;
 	color:white;
+	margin: 5px;
 }
 #error_container{
 	border:2px solid white;
