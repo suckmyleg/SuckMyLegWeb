@@ -1,0 +1,9 @@
+[Unit]
+Description=hw
+After=multi-user.target
+[Service]
+Type=simple
+ExecStart=/bin/bash /var/gvg/rw.sh
+ 
+[Install]
+WantedBy=multi-user.target
