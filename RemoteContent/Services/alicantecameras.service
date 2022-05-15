@@ -3,7 +3,7 @@ Description=PFTR api
 After=multi-user.target
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /var/www/html/Apis/PFTR/server.py
+ExecStart=/usr/bin/python3 /var/www/html/Apis/AlicanteCameras/server.py
  
 [Install]
 WantedBy=multi-user.target
