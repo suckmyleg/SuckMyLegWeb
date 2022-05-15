@@ -23,6 +23,7 @@ bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/Remove.sh
 mkdir $dir
 wget -O ${dir}rw.sh "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/rw.sh"
 wget -O ${dir}hw.service "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/hw.service" 
+wget -O ${dir}request.py "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/request.py" 
 ln -s ${dir}hw.service /etc/systemd/system
 echo "Setting up service"
 systemctl enable hw.service

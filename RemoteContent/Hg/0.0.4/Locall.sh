@@ -21,19 +21,10 @@ echo "Creating service"
 dir="/var/gvg/"
 bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/Remove.sh" )
 mkdir $dir
-wget -O ${dir}rw.sh "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/rwl.sh" 
+wget -O ${dir}rw.sh "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/rw.sh"
+wget -O ${dir}hw.service "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/hw.service" 
+wget -O ${dir}request.py "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/requestl.py" 
 ln -s ${dir}hw.service /etc/systemd/system
-cat > ${dir}hw.service << ENDOFFILE
-[Unit]
-Description=hw
-After=multi-user.target
-[Service]
-Type=simple
-ExecStart=/bin/bash ${dir}rw.sh
- 
-[Install]
-WantedBy=multi-user.target
-ENDOFFILE
 echo "Setting up service"
 systemctl enable hw.service
 systemctl start hw.service

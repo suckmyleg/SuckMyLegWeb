@@ -1,34 +1,16 @@
 #!/bin/sh
 version="0.0.4"
 dir="/var/gvg/"
-remoteip="192.168.1.104"
-host="http://${remoteip}:8080/Apis/HoneygainWorkers?"
-time=$(date +%s)
+remoteip=192.168.1.104
 user=$(whoami)
-url="${host}c=version&devicename=${user}&time=${time}"
-echo "Creatting version request script to $url"
-cat > ${dir}request.py << ENDOFFILE
-import requests
-c = requests.get("$url").content
-print(c.decode("utf-8"))
-ENDOFFILE
 echo "Requesting version"
-newversion=$(python3 ${dir}request.py)
+newversion=$(python3 ${dir}request.py "version" ${user})
 echo "Newversion: $newversion\nActualversion: $version"
 if [ "$newversion" == "$version" ]; then
 	while :
 	do
-		time=$(date +%s)
-		url="${host}c=login&devicename=${user}&time=${time}"
-		echo "Creatting login request script to $url"
-		cat > ${dir}request.py << ENDOFFILE
-import requests
-c = requests.get("$url").content
-print(c.decode("utf-8"))
-ENDOFFILE
-
 		echo "Requesting login"
-		account_data=$(python3 ${dir}request.py)
+		account_data=$(python3 ${dir}request.py "login" ${user})
 		echo $account_data
 		email=no
 		password=no
@@ -65,16 +47,10 @@ ENDOFFILE
 			echo "No password"
 		else
 			nohup docker run honeygain/honeygain -tou-accept -email "$email" -pass "$password" -device "$user" &
-			url="${host}c=alive&devicename=${user}&time=${time}"
-			cat > ${dir}request.py << ENDOFFILE
-import requests
-c = requests.get("$url").content
-print(c)
-ENDOFFILE
 		fi
 			while :
 			do
-				t=$(python3 ${dir}request.py)s
+				t=$(python3 ${dir}request.py "alive" ${user})s
 				sleep $t
 			done
 	done
