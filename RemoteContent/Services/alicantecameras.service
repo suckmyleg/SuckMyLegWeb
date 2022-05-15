@@ -1,5 +1,5 @@
 [Unit]
-Description=PFTR api
+Description=AlicanteCameras api
 After=multi-user.target
 [Service]
 Type=simple
