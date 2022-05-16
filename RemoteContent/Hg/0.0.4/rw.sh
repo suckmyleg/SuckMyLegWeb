@@ -14,7 +14,7 @@ if [ "$newversion" == "$version" ]; then
 		echo $account_data
 		email=no
 		password=no
-		IFS=' '
+		IFS=''
 		read -ra lines <<< "${account_data}"
 		i=0
 		for line in "${lines[@]}";
