@@ -1,20 +1,20 @@
 #!/bin/sh
 version="0.0.4"
 dir="/var/gvg/"
-remoteip=$(dig sw22.ddns.net +short)
+remoteip=192.168.1.104
 user=$(whoami)
 echo "Requesting version"
-newversion=$(python3 ${dir}request.py "version" ${user})
+newversion=$(python3 ${dir}request.py "version" ${user} ${version})
 echo "Newversion: $newversion\nActualversion: $version"
 if [ "$newversion" == "$version" ]; then
 	while :
 	do
 		echo "Requesting login"
-		account_data=$(python3 ${dir}request.py "login" ${user})
+		account_data=$(python3 ${dir}request.py "login" ${user} ${version})
 		echo $account_data
 		email=no
 		password=no
-		IFS=' '
+		IFS='-'
 		read -ra lines <<< "$account_data"
 		i=0
 		for line in "${lines[@]}";
@@ -50,12 +50,12 @@ if [ "$newversion" == "$version" ]; then
 		fi
 			while :
 			do
-				t=$(python3 ${dir}request.py "alive" ${user})s
+				t=$(python3 ${dir}request.py "alive" ${user} ${version})s
 				sleep $t
 			done
 	done
 else
 	echo "New version"
 	echo "Installing"
-	bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"${newversion}"/Locall.sh" )
+	bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"${newversion}"/Install.sh" )
 fi
