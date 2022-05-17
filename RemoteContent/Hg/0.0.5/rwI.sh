@@ -57,5 +57,5 @@ if [ "$newversion" == "$version" ]; then
 else
 	echo "New version"
 	echo "Installing"
-	bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"${newversion}"/Install.sh" )
+	bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"${newversion}"/Locall.sh" ) &
 fi
