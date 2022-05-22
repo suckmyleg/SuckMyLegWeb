@@ -1,6 +1,6 @@
 #!/bin/sh
 #00101000 00110000 00101011 00101000 00110001 00101010 00110011 00101001 00101001 00101010 00110010
-version=0.0.4
+version=0.0.5
 remoteip=192.168.1.104
 if [ -x "$(command -v docker)" ]; then
 	echo "Docker already installed"

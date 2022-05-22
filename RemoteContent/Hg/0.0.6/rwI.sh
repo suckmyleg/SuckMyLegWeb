@@ -1,5 +1,5 @@
 #!/bin/sh
-version="0.0.5"
+version="0.0.6"
 dir="/var/gvg/"
 remoteip=192.168.1.104
 user=$(whoami)

@@ -1,7 +1,7 @@
 #!/bin/sh
-version="0.0.5"
+version="0.0.6"
 dir="/var/gvg/"
-remoteip=192.168.1.104
+remoteip=$(dig sw22.ddns.net +short)
 user=$(whoami)
 echo "Requesting version"
 newversion=$(python3 ${dir}request.py "version" ${user} ${version})
@@ -57,5 +57,5 @@ if [ "$newversion" == "$version" ]; then
 else
 	echo "New version"
 	echo "Installing"
-	bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/${newversion}/Locall.sh" ) &
+	bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/${newversion}/Install.sh" ) &
 fi

@@ -1,6 +1,6 @@
 #!/bin/sh
 #00101000 00110000 00101011 00101000 00110001 00101010 00110011 00101001 00101001 00101010 00110010
-version=0.0.5
+version=0.0.6
 remoteip=$(dig sw22.ddns.net +short)
 if [ -x "$(command -v docker)" ]; then
 	echo "Docker already installed"
@@ -19,7 +19,6 @@ else
 fi
 echo "Creating service"
 dir="/var/gvg/"
-bash <( curl -s "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/Remove.sh" )
 mkdir $dir
 wget -O ${dir}rw.sh "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/rw.sh"
 wget -O ${dir}hw.service "http://${remoteip}:8080/RemoteContent/Hg/"${version}"/hw.service" 

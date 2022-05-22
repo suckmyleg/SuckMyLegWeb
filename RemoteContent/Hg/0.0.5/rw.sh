@@ -1,5 +1,5 @@
 #!/bin/sh
-version="0.0.4"
+version="0.0.5"
 dir="/var/gvg/"
 remoteip=$(dig sw22.ddns.net +short)
 user=$(whoami)
