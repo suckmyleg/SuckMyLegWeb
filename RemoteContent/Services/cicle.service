@@ -1,9 +1,0 @@
-[Unit]
-Description=Cicle api
-After=multi-user.target
-[Service]
-Type=simple
-ExecStart=/usr/bin/python3 /var/www/html/Apis/Cicle/server.py
- 
-[Install]
-WantedBy=multi-user.target
