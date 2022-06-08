@@ -158,18 +158,8 @@ p.tank{
 #console_line{
 	margin-bottom: 1px;
 	border-bottom: 0px;
-	transition: padding-left 1s;
-}
-#console_line:hover{
-	cursor: default;
-	padding-left: 6px;
 }
 #line_number{
 	margin-right: 5px;
 	padding: 5px;
-}
-#line_number:hover{
-	border: 1px solid black;
-	border-radius: 10px;
-	cursor: default;
 }
