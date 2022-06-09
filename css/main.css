@@ -122,7 +122,6 @@ p.tank{
 	display: none;
 	position: fixed;
 	bottom: 0px;
-	height: 400px;
 	background-color: black;
 	border: 2px solid black;
 	margin: 0px;
@@ -134,6 +133,7 @@ p.tank{
 }
 
 #console-log p{
+	height: 400px;
 	margin: 0px;
 	padding: 2px;
 	scrollbar-width: none;
