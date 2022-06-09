@@ -181,4 +181,5 @@ p.tank{
 	width: 100%;
 	transition: border-color 3s;
 	bottom: 0px;
+	left: 0px;
 }
