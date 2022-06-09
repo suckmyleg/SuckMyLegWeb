@@ -174,9 +174,11 @@ p.tank{
 }
 
 #Remote_console_input{
+	position: fixed;
 	border: 2px solid white;
 	border-radius: 5px;
 	padding: 5px;
 	width: 100%;
 	transition: border-color 3s;
+	bottom: 0px;
 }
