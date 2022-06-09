@@ -163,3 +163,17 @@ p.tank{
 	margin-right: 5px;
 	padding: 5px;
 }
+
+#Remote_console_input:hover{
+	cursor: default;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+#Remote_console_input{
+	border: 2px solid white;
+	border-radius: 5px;
+	padding: 5px;
+	width: 100%;
+	transition: border-color 3s;
+}
