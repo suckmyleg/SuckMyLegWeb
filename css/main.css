@@ -118,10 +118,13 @@ p.tank{
 	transition: background-color 2s;
 }
 
+
+
+
 #console{
 	display: none;
 	position: fixed;
-	bottom: 0px;
+	bottom: 50px;
 	height: 400px;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -171,7 +174,6 @@ p.tank{
 }
 
 #Remote_console_input{
-	position: fixed;
 	border: 2px solid white;
 	border-radius: 5px;
 	padding: 5px;
