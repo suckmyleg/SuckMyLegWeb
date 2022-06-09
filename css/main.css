@@ -124,7 +124,7 @@ p.tank{
 #console{
 	display: none;
 	position: fixed;
-	bottom: 50px;
+	bottom: 25px;
 	height: 400px;
 	overflow-x: hidden;
 	overflow-y: auto;
