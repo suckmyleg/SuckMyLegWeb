@@ -1,0 +1,9 @@
+[Unit]
+Description=IMO api
+After=multi-user.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /var/www/html/Apis/IMO/server.py
+ 
+[Install]
+WantedBy=multi-user.target
