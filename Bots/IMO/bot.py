@@ -28,8 +28,7 @@ def until_pay():
     return send_c("get_max_handle_ammount") - send_c("get_money_handled")
 
 async def qrs_available_today(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    for qr in get_qrs():
-        await update.message.reply_text(len(get_qrs()))
+    await update.message.reply_text(len(get_qrs()))
 
 async def get_qr(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     for qr in get_qrs():
@@ -76,14 +75,19 @@ async def qr(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         types = []
         i = 0
 
-        for q in get_qrs():
-            if not q["type"] in types:
-                keyboard.append(["/"+q["type"]])
-                types.append(q["type"])
+        qrs = get_qrs()
 
-        markup = ReplyKeyboardMarkup(keyboard)
+        if len(qrs) == 0:
+            await update.message.reply_text("No hay codigos qr disponible por hoy")
+        else:
+            for q in qrs:
+                if not q["type"] in types:
+                    keyboard.append(["/"+q["type"]])
+                    types.append(q["type"])
 
-        await update.message.reply_text("Selecciona tipo qr", reply_markup=markup)
+            markup = ReplyKeyboardMarkup(keyboard)
+
+            await update.message.reply_text("Selecciona tipo qr", reply_markup=markup)
 
         
 
