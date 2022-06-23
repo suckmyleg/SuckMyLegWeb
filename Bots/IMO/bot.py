@@ -4,6 +4,10 @@ import requests
 import json
 import time
 
+last_scan = 0
+
+delay_scan = 5*60
+
 available_commands = []
 
 def send_c(c, args="", j=False):
@@ -18,6 +22,13 @@ def send_c(c, args="", j=False):
 
 def get_qrs():
     return send_c("get_qrs")
+
+def time_to_wait():
+    passed = time.time() - last_scan
+
+    if passed < delay_scan and passed >= 0:
+        return passed
+    return False
 
 def check_available():
     if until_pay() <= 0:
@@ -68,9 +79,15 @@ async def get_max_handle_days(update: Update, context: ContextTypes.DEFAULT_TYPE
     await update.message.reply_text(send_c("get_max_handle_days", j=True))
 
 async def qr(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    tt = time_to_wait()
+
     if not check_available():
         await update.message.reply_text(f"Escaneado de qr bloqueado hasta que se transfieran los {send_c('get_money_handled')} euros a la cuenta")
+    elif not tt == False:
+        await update.message.reply_text(f"{tt} segundos hasta el siguiente escaneo")
     else:
+        last_scan = time.time()
+
         keyboard = []
         types = []
         i = 0
