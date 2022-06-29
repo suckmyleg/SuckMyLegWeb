@@ -22,6 +22,9 @@ def send_c(c, args="", j=False):
 async def memes_unchecked(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(len(send_c("get_memes_to_aprove")))
 
+async def memes_ready(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text(len(send_c("get_aproved_memes")))
+
 async def hel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("Commands:")
     for c in available_commands:
@@ -34,6 +37,10 @@ async def help_api(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def recargar_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     send_c("if_reload")
     await update.message.reply_text("Reloaded")
+
+async def download_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    send_c("download_all")
+    await update.message.reply_text("Downloaded")
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Parses the CallbackQuery and updates the message text."""
@@ -49,6 +56,15 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         send_c("aprove_meme", args=f"&file_name={data[1]}", j=True)
     else:
         send_c("disaprove_meme", args=f"&file_name={data[1]}", j=True)
+
+async def new_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    username = "timordius"
+
+    await update.message.reply_text("Uploading")
+
+    send_c("new_meme", args=f"&username={username}")
+
+    await update.message.reply_text("Uploaded new meme")
 
 async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     last_scan = time.time()
@@ -77,17 +93,20 @@ def add_c(n, f):
     return CommandHandler(n,f)
 
 async def Start_(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/help"], ["/dinero_propio", "/dinero_conseguido"], ["/deuda", "/dinero_pagado"], ["/memes_unchecked"]]))
+    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
 
 
 app = ApplicationBuilder().token("5402422929:AAFILnDKzcTW3kjcY0OII-d7qviTghQmd8g").build()
 
 app.add_handler(CommandHandler("start", Start_))
 app.add_handler(add_c("recargar_memes", recargar_memes))
+app.add_handler(add_c("download_memes", download_memes))
 app.add_handler(add_c("help", hel))
 app.add_handler(add_c("aprove", aprove))
+app.add_handler(add_c("new_meme", new_meme))
 
 app.add_handler(add_c("memes_unchecked", memes_unchecked))
+app.add_handler(add_c("memes_ready", memes_ready))
 app.add_handler(CallbackQueryHandler(button))
 print("Starting")
 app.run_polling()
