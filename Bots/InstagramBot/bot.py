@@ -66,15 +66,13 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else:
         meme = memes[0]
 
+        keyboard = InlineKeyboardMarkup([[ InlineKeyboardButton("\xF0\x9F\x91\x8D", callback_data="YES:::"+meme['file_name'])], [InlineKeyboardButton("\xF0\x9F\x91\x8E", callback_data="NO:::"+meme['file_name']) ]])
+
         if meme["isvideo"]:
             await context.bot.reply_video(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
-            await update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"))
+            await update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)
         else:
-            await context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
-
-        
-
-        await update.message.reply_text(".", reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Yes", callback_data="YES:::"+meme['file_name'])], [InlineKeyboardButton("No", callback_data="NO:::"+meme['file_name']) ]]))
+            await context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)
 
 def add_c(n, f):
     available_commands.append(n)
