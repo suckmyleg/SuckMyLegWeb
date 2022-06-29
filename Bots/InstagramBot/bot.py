@@ -53,11 +53,13 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     data = query.data.split(":::")
 
     if data[0] == "YES":
-        send_c("aprove_meme", args=f"&file_name={data[1]}", j=True)
+        await update.effective_message.reply_text(send_c("aprove_meme", args=f"&file_name={data[1]}", j=True))
     else:
-        send_c("disaprove_meme", args=f"&file_name={data[1]}", j=True)
+        await update.effective_message.reply_text(send_c("disaprove_meme", args=f"&file_name={data[1]}", j=True))
 
-    await Start_(update, context)
+    update.message = update.effective_message
+
+    await aprove(update, context)
 
 async def new_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     username = "timordius"
