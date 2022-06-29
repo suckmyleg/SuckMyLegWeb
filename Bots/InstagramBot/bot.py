@@ -68,6 +68,18 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     await aprove(update, context)
 
+async def new_account(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if len(context.args) > 0:
+        username = context.args[0]
+
+        send_c("new_account_to_steal", args=f"&username={username}")
+
+        await update.message.reply_text(f"{username} added to list")
+    else:
+        await update.message.reply_text("Username argument missing")
+
+
+
 async def new_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     username = "timordius"
 
