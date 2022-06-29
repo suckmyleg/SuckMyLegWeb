@@ -59,7 +59,7 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         if meme["isvideo"]:
             update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"), caption=update.message.text)
         else:
-            update.message.reply_photo(meme["url"])
+            update.message.reply_photo(open(MEMES_LOCATION+meme["file_name"], "rb"))
 
         await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([[f"/aprove_meme {meme['file_name']}"], [f"/no_aprove_meme {meme['file_name']}"]]))
 
