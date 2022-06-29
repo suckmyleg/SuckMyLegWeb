@@ -35,14 +35,6 @@ async def recargar_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     send_c("if_reload")
     await update.message.reply_text("Reloaded")
 
-async def aprove_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    send_c("aprove_meme", args=f"&file_name={context.args[0]}", j=True)
-    await update.message.reply_text("Aproved")
-
-async def no_aprove_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    send_c("disaprove_meme", args=f"&file_name={context.args[0]}", j=True)
-    await update.message.reply_text("Disaproved")
-
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Parses the CallbackQuery and updates the message text."""
     query = update.callback_query
@@ -52,6 +44,13 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await query.answer()
 
     await query.edit_message_text(text=f"Selected option: {query.data}")
+
+    data = query.data.split(":::")
+
+    if data[0] == "YES":
+        send_c("aprove_meme", args=f"&file_name={data[1]}", j=True)
+    else:
+        send_c("disaprove_meme", args=f"&file_name={data[1]}", j=True)
 
 async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     last_scan = time.time()
@@ -75,7 +74,7 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
         
 
-        await update.message.reply_text(".", reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Yes", callback_data="NO/"+meme['file_name']), InlineKeyboardButton("No", callback_data="YES/"+meme['file_name']) ]]))
+        await update.message.reply_text(".", reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Yes", callback_data="YES:::"+meme['file_name'])], [InlineKeyboardButton("No", callback_data="NO:::"+meme['file_name']) ]]))
 
 def add_c(n, f):
     available_commands.append(n)
@@ -89,8 +88,6 @@ app = ApplicationBuilder().token("5402422929:AAFILnDKzcTW3kjcY0OII-d7qviTghQmd8g
 
 app.add_handler(CommandHandler("start", Start_))
 app.add_handler(add_c("recargar_memes", recargar_memes))
-app.add_handler(add_c("aprove_meme", aprove_meme))
-app.add_handler(add_c("no_aprove_meme", no_aprove_meme))
 app.add_handler(add_c("help", hel))
 app.add_handler(add_c("aprove", aprove))
 
