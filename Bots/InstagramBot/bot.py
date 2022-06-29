@@ -22,7 +22,7 @@ def send_c(c, args="", j=False):
 async def memes_unchecked(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(len(send_c("get_memes_to_aprove")))
 
-async def memes_ready(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def memes_checked(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(len(send_c("get_aproved_memes")))
 
 async def hel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -106,7 +106,7 @@ app.add_handler(add_c("aprove", aprove))
 app.add_handler(add_c("new_meme", new_meme))
 
 app.add_handler(add_c("memes_unchecked", memes_unchecked))
-app.add_handler(add_c("memes_ready", memes_ready))
+app.add_handler(add_c("memes_checked", memes_checked))
 app.add_handler(CallbackQueryHandler(button))
 print("Starting")
 app.run_polling()
