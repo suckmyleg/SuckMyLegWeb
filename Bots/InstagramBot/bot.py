@@ -38,6 +38,10 @@ async def recargar_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     send_c("if_reload")
     await update.message.reply_text("Reloaded")
 
+async def forzar_recarga(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    send_c("force_reload_requests_data")
+    await update.message.reply_text("Reloaded")
+
 async def download_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     send_c("download_all")
     await update.message.reply_text("Downloaded")
@@ -104,13 +108,14 @@ def add_c(n, f):
     return CommandHandler(n,f)
 
 async def Start_(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
+    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help", "/forzar_recarga"]]))
 
 
 app = ApplicationBuilder().token("5402422929:AAFILnDKzcTW3kjcY0OII-d7qviTghQmd8g").build()
 
 app.add_handler(CommandHandler("start", Start_))
 app.add_handler(add_c("recargar_memes", recargar_memes))
+app.add_handler(add_c("forzar_recarga", forzar_recarga))
 app.add_handler(add_c("download_memes", download_memes))
 app.add_handler(add_c("help", hel))
 app.add_handler(add_c("aprove", aprove))
