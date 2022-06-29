@@ -78,16 +78,20 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if len(memes) == 0:
         await update.message.reply_text("No hay memes disponibles", reply_markup=ReplyKeyboardMarkup([["/recargar_memes"], ["/start"]]))
     else:
-        meme = memes[0]
+        for meme in memes:
+            try:
 
-        keyboard = InlineKeyboardMarkup([[ InlineKeyboardButton("👍", callback_data="YES:::"+meme['file_name'])], [InlineKeyboardButton("👎", callback_data="NO:::"+meme['file_name']) ]])
+                keyboard = InlineKeyboardMarkup([[ InlineKeyboardButton("👍", callback_data="YES:::"+meme['file_name'])], [InlineKeyboardButton("👎", callback_data="NO:::"+meme['file_name']) ]])
 
-        if meme["isvideo"]:
-            await context.bot.reply_video(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
-            await update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)
-        else:
-            await context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)
-
+                if meme["isvideo"]:
+                    await context.bot.reply_video(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
+                    await update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)
+                else:
+                    await context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)
+            except:
+                pass
+            else:
+                break
 def add_c(n, f):
     available_commands.append(n)
     return CommandHandler(n,f)
