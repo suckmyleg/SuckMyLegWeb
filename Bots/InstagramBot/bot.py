@@ -95,7 +95,10 @@ def add_c(n, f):
     return CommandHandler(n,f)
 
 async def Start_(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
+    if update.message == None:
+        update.effective_message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
+    else:
+        await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
 
 
 app = ApplicationBuilder().token("5402422929:AAFILnDKzcTW3kjcY0OII-d7qviTghQmd8g").build()
