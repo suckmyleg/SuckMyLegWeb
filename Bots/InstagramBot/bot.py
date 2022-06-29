@@ -66,7 +66,7 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else:
         meme = memes[0]
 
-        keyboard = InlineKeyboardMarkup([[ InlineKeyboardButton("\xF0\x9F\x91\x8D", callback_data="YES:::"+meme['file_name'])], [InlineKeyboardButton("\xF0\x9F\x91\x8E", callback_data="NO:::"+meme['file_name']) ]])
+        keyboard = InlineKeyboardMarkup([[ InlineKeyboardButton("👍", callback_data="YES:::"+meme['file_name'])], [InlineKeyboardButton("👎", callback_data="NO:::"+meme['file_name']) ]])
 
         if meme["isvideo"]:
             await context.bot.reply_video(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
