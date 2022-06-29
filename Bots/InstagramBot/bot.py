@@ -43,8 +43,6 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     await query.answer()
 
-    await query.edit_message_text(text=f"Selected option: {query.data}")
-
     data = query.data.split(":::")
 
     if data[0] == "YES":
