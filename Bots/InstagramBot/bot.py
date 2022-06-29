@@ -18,8 +18,6 @@ def send_c(c, args="", j=False):
         return r
     return json.loads(r)
 
-async def show_menu(update):
-    update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/help"], ["/dinero_propio", "/dinero_conseguido"], ["/deuda", "/dinero_pagado"], ["/codigos_disponibles"]]))
 
 async def memes_unchecked(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(len(send_c("get_memes_to_aprove")))
@@ -28,27 +26,22 @@ async def hel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("Commands:")
     for c in available_commands:
         await update.message.reply_text("--- "+c)
-    show_menu(update)
 
 async def help_api(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     for c in send_c("help"):
         await update.message.reply_text(c)
-    show_menu(update)
 
 async def recargar_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     send_c("if_reload")
     await update.message.reply_text("Reloaded")
-    show_menu(update)
 
 async def aprove_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     send_c("aprove_meme", args=f"&file_name={context.args[0]}", j=True)
     await update.message.reply_text("Aproved")
-    show_menu(update)
 
 async def no_aprove_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     send_c("disaprove_meme", args=f"&file_name={context.args[0]}", j=True)
     await update.message.reply_text("Disaproved")
-    show_menu(update)
 
 async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     last_scan = time.time()
@@ -76,7 +69,7 @@ def add_c(n, f):
     return CommandHandler(n,f)
 
 async def Start_(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    show_menu(update)
+    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/help"], ["/dinero_propio", "/dinero_conseguido"], ["/deuda", "/dinero_pagado"], ["/codigos_disponibles"]]))
 
 
 app = ApplicationBuilder().token("5402422929:AAFILnDKzcTW3kjcY0OII-d7qviTghQmd8g").build()
