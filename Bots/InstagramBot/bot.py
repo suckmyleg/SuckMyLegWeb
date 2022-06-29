@@ -34,15 +34,18 @@ async def help_api(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     for c in send_c("help"):
         await update.message.reply_text(c)
 
-async def recargar_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def reload_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text("Reloading")
     send_c("if_reload")
     await update.message.reply_text("Reloaded")
 
-async def forzar_recarga(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def force_reload(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text("Forcing reload")
     send_c("force_reload_requests_data")
     await update.message.reply_text("Reloaded")
 
 async def download_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text("Downloading memes")
     send_c("download_all")
     await update.message.reply_text("Downloaded")
 
@@ -82,7 +85,7 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     memes = send_c("get_memes_to_aprove")
 
     if len(memes) == 0:
-        await update.message.reply_text("No hay memes disponibles", reply_markup=ReplyKeyboardMarkup([["/recargar_memes"], ["/start"]]))
+        await update.message.reply_text("No hay memes disponibles", reply_markup=ReplyKeyboardMarkup([["/reload_memes"], ["/start"]]))
     else:
         for meme in memes:
             try:
@@ -108,14 +111,14 @@ def add_c(n, f):
     return CommandHandler(n,f)
 
 async def Start_(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help", "/forzar_recarga"]]))
+    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/reload_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help", "/force_reload"]]))
 
 
 app = ApplicationBuilder().token("5402422929:AAFILnDKzcTW3kjcY0OII-d7qviTghQmd8g").build()
 
 app.add_handler(CommandHandler("start", Start_))
-app.add_handler(add_c("recargar_memes", recargar_memes))
-app.add_handler(add_c("forzar_recarga", forzar_recarga))
+app.add_handler(add_c("reload_memes", reload_memes))
+app.add_handler(add_c("force_reload", force_reload))
 app.add_handler(add_c("download_memes", download_memes))
 app.add_handler(add_c("help", hel))
 app.add_handler(add_c("aprove", aprove))
