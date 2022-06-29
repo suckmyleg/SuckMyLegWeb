@@ -53,9 +53,9 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     data = query.data.split(":::")
 
     if data[0] == "YES":
-        await update.effective_message.reply_text(send_c("aprove_meme", args=f"&file_name={data[1]}", j=True))
+        await update.effective_message.reply_text(send_c("aprove_meme", args=f"&file_name={data[1]}"))
     else:
-        await update.effective_message.reply_text(send_c("disaprove_meme", args=f"&file_name={data[1]}", j=True))
+        await update.effective_message.reply_text(send_c("disaprove_meme", args=f"&file_name={data[1]}"))
 
     update.message = update.effective_message
 
@@ -85,9 +85,12 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
                 keyboard = InlineKeyboardMarkup([[ InlineKeyboardButton("👍", callback_data="YES:::"+meme['file_name'])], [InlineKeyboardButton("👎", callback_data="NO:::"+meme['file_name']) ]])
 
+                update.message.reply_text(f"From: {meme['account']}  likes: {meme['likes']}  views: {meme['views']} ")
+
                 if meme["isvideo"]:
-                    await context.bot.reply_video(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
-                    await update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)
+                    await update.message.reply_text("http://sw22.ddns.net:8081/Apis/InstagramBot/Content/Memes/"+meme["file_name"], reply_markup=keyboard)
+                    """await context.bot.reply_video(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
+                    await update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)"""
                 else:
                     await context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)
             except:
@@ -99,10 +102,7 @@ def add_c(n, f):
     return CommandHandler(n,f)
 
 async def Start_(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    if update.message == None:
-        await update.effective_message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
-    else:
-        await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
+    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
 
 
 app = ApplicationBuilder().token("5402422929:AAFILnDKzcTW3kjcY0OII-d7qviTghQmd8g").build()
