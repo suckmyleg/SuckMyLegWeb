@@ -54,6 +54,8 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if len(memes) == 0:
         await update.message.reply_text("No hay memes disponibles", reply_markup=ReplyKeyboardMarkup([["/recargar_memes"], ["/start"]]))
     else:
+        meme = memes[0]
+        
         if meme["isvideo"]:
             update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"), caption=update.message.text)
         else:
