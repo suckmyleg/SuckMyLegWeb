@@ -57,6 +57,8 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else:
         send_c("disaprove_meme", args=f"&file_name={data[1]}", j=True)
 
+    await Start_()
+
 async def new_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     username = "timordius"
 
