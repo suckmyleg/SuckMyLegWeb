@@ -58,10 +58,10 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         meme = memes[0]
 
         if meme["isvideo"]:
-            context.bot.reply_video(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
-            update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"))
+            await context.bot.reply_video(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
+            await update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"))
         else:
-            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
+            await context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
 
         await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([[f"/aprove_meme {meme['file_name']}"], [f"/no_aprove_meme {meme['file_name']}"]]))
 
