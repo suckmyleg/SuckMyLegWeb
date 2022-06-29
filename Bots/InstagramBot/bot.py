@@ -53,18 +53,16 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     data = query.data.split(":::")
 
     if data[0] == "YES":
-        send_c("aprove_meme", args=f"&file_name={data[1]}", j=True)
+        await update.message.reply_text(send_c("aprove_meme", args=f"&file_name={data[1]}", j=True))
     else:
-        send_c("disaprove_meme", args=f"&file_name={data[1]}", j=True)
+       await update.message.reply_text( send_c("disaprove_meme", args=f"&file_name={data[1]}", j=True))
 
 async def new_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     username = "timordius"
 
     await update.message.reply_text("Uploading")
 
-    send_c("new_meme", args=f"&username={username}")
-
-    await update.message.reply_text("Uploaded new meme")
+    await update.message.reply_text(send_c("new_meme", args=f"&username={username}", j=True))
 
 async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     last_scan = time.time()
