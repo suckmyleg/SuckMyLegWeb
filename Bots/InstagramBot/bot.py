@@ -43,6 +43,16 @@ async def no_aprove_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     send_c("disaprove_meme", args=f"&file_name={context.args[0]}", j=True)
     await update.message.reply_text("Disaproved")
 
+async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Parses the CallbackQuery and updates the message text."""
+    query = update.callback_query
+
+    # CallbackQueries need to be answered, even if no notification to the user is needed
+    # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
+    await query.answer()
+
+    await query.edit_message_text(text=f"Selected option: {query.data}")
+
 async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     last_scan = time.time()
 
@@ -63,14 +73,16 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         else:
             await context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"))
 
-        await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([[f"/aprove_meme {meme['file_name']}"], [f"/no_aprove_meme {meme['file_name']}"]]))
+        
+
+        await update.message.reply_text(".", reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Yes", callback_data="NO/"+meme['file_name']), InlineKeyboardButton("No", callback_data="YES/"+meme['file_name']) ]]))
 
 def add_c(n, f):
     available_commands.append(n)
     return CommandHandler(n,f)
 
 async def Start_(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/help"], ["/dinero_propio", "/dinero_conseguido"], ["/deuda", "/dinero_pagado"], ["/codigos_disponibles"]]))
+    await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/help"], ["/dinero_propio", "/dinero_conseguido"], ["/deuda", "/dinero_pagado"], ["/memes_unchecked"]]))
 
 
 app = ApplicationBuilder().token("5402422929:AAFILnDKzcTW3kjcY0OII-d7qviTghQmd8g").build()
@@ -82,7 +94,7 @@ app.add_handler(add_c("no_aprove_meme", no_aprove_meme))
 app.add_handler(add_c("help", hel))
 app.add_handler(add_c("aprove", aprove))
 
-app.add_handler(add_c("codigos_disponibles", memes_unchecked))
+app.add_handler(add_c("memes_unchecked", memes_unchecked))
 print("Starting")
 app.run_polling()
 
