@@ -98,7 +98,7 @@ def add_c(n, f):
 
 async def Start_(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if update.message == None:
-        update.effective_message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
+        await update.effective_message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
     else:
         await update.message.reply_text(".", reply_markup=ReplyKeyboardMarkup([["/aprove", "/new_meme"], ["/recargar_memes", "/download_memes"], ["/memes_unchecked", "/memes_checked"], ["/help"]]))
 
