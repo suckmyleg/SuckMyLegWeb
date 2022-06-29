@@ -95,6 +95,7 @@ app.add_handler(add_c("help", hel))
 app.add_handler(add_c("aprove", aprove))
 
 app.add_handler(add_c("memes_unchecked", memes_unchecked))
+app.add_handler(CallbackQueryHandler(button))
 print("Starting")
 app.run_polling()
 
