@@ -110,7 +110,7 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     await update.message.reply_text(meme["url"], reply_markup=keyboard)
                 else:
                     await update.message.reply_text(f"From: {meme['account']}  likes: {meme['likes']}  views: {meme['views']} ")
-                    await context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)
+                    await context.bot.send_photo(chat_id=update.effective_chat.id, photo=requests.get(meme["url"]).content, reply_markup=keyboard)
             except Exception as e:
                 await update.message.reply_text(str(e))
                 print(e)
