@@ -106,11 +106,8 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
                 if meme["isvideo"]:
-                    #print(asfdaf)
+                    await update.message.reply_text(f"From: {meme['account']}  likes: {meme['likes']}  views: {meme['views']} ")
                     await update.message.reply_text(meme["url"], reply_markup=keyboard)
-                    #await context.bot.reply_video(chat_id=update.effective_chat.id, photo=open(meme["url"], "rb"))
-                    """await update.message.reply_text("http://sw22.ddns.net:8081/Apis/InstagramBot/Content/Memes/"+meme["file_name"], reply_markup=keyboard)
-                    await update.message.reply_video(open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)"""
                 else:
                     await update.message.reply_text(f"From: {meme['account']}  likes: {meme['likes']}  views: {meme['views']} ")
                     await context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(MEMES_LOCATION+meme["file_name"], "rb"), reply_markup=keyboard)
