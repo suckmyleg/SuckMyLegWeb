@@ -98,6 +98,7 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     if len(memes) == 0:
         await update.message.reply_text("No hay memes disponibles", reply_markup=ReplyKeyboardMarkup([["/reload_memes"], ["/start"]]))
+        return None
     else:
         for meme in memes:
             try:
@@ -117,7 +118,9 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             except:
                 pass
             else:
-                break
+                return None
+        await update.message.reply_text("No hay memes disponibles", reply_markup=ReplyKeyboardMarkup([["/reload_memes"], ["/start"]]))
+
 def add_c(n, f):
     available_commands.append(n)
     return CommandHandler(n,f)
