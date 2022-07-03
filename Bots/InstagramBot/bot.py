@@ -13,17 +13,32 @@ def send_c(c, args="", j=False):
     print(url)
     r = requests.get(url).content.decode("utf-8")
 
+    if r == "Apy busy or off":
+        return False
+
     #print(r)
     if j:
         return r
-    return json.loads(r)
-
+    try:
+        return json.loads(r)
+    except:
+        return r
 
 async def memes_unchecked(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(len(send_c("get_memes_to_aprove")))
+    unchecked = send_c("get_memes_to_aprove")
+
+    if unchecked == False:
+        await update.message.reply_text("Cant connect to server")
+    else:
+        await update.message.reply_text(len(unchecked))
 
 async def memes_checked(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(len(send_c("get_aproved_memes")))
+    aproved = send_c("get_aproved_memes")
+
+    if aproved == False:
+        await update.message.reply_text("Cant connect to server")
+    else:
+        await update.message.reply_text(len(aproved))
 
 async def hel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("Commands:")
@@ -36,18 +51,24 @@ async def help_api(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def reload_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("Reloading")
-    send_c("if_reload")
-    await update.message.reply_text("Reloaded")
+    if send_c("if_reload") == False:
+        await update.message.reply_text("Couldnt reload")
+    else:
+        await update.message.reply_text("Reloaded")
 
 async def force_reload(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("Forcing reload")
-    send_c("force_reload_requests_data")
-    await update.message.reply_text("Reloaded")
+    if send_c("force_reload_requests_data") == False:
+        await update.message.reply_text("Couldnt reload")
+    else:
+        await update.message.reply_text("Reloaded")
 
 async def download_memes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("Downloading memes")
-    send_c("download_all")
-    await update.message.reply_text("Downloaded")
+    if send_c("download_all") == False:
+        await update.message.reply_text("Couldnt download")
+    else:
+        await update.message.reply_text("Downloaded")
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Parses the CallbackQuery and updates the message text."""
