@@ -139,9 +139,9 @@ async def bots(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     for bot in get_bots_available():
         bot_keys = []
 
-        bot_keys.append([InlineKeyboardButton(f"🤖{bot['username']}{lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=f"new_meme::{bot['username']}")])
-        bot_keys.append([InlineKeyboardButton(f"🤖{bot['username']}{lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=f"new_meme::{bot['username']}")])
-        bot_keys.append([InlineKeyboardButton(f"🤖{bot['username']}{lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=f"new_meme::{bot['username']}")])
+        bot_keys.append(InlineKeyboardButton(f"🤖{bot['username']}{lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=f"new_meme::{bot['username']}"))
+        bot_keys.append(InlineKeyboardButton(f"🤖{bot['username']}{lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=f"new_meme::{bot['username']}"))
+        bot_keys.append(InlineKeyboardButton(f"🤖{bot['username']}{lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=f"new_meme::{bot['username']}"))
         keys.append(bot_keys)
 
     keyboard = InlineKeyboardMarkup(keys)
