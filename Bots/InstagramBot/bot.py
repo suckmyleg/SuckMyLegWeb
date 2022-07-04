@@ -86,17 +86,13 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     await query.answer()
 
-    data = query.data.split(":::")
+    data = query.data.split("::")
 
-    response = data[0]
-
-    del data[0]
-
-    if response == "aprove":
-        if data[0] == "YES":
-            await update.effective_message.reply_text(send_c("aprove_meme", args=f"&file_name={data[1]}"))
+    if data[0] == "aprove":
+        if data[1] == "YES":
+            await update.effective_message.reply_text(send_c("aprove_meme", args=f"&file_name={data[2]}"))
         else:
-            await update.effective_message.reply_text(send_c("disaprove_meme", args=f"&file_name={data[1]}"))
+            await update.effective_message.reply_text(send_c("disaprove_meme", args=f"&file_name={data[2]}"))
 
         update.message = update.effective_message
 
@@ -104,7 +100,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     elif response == "new_meme":
 
-        username = data[0]
+        username = data[1]
 
         await update.effective_message.reply_text("Uploading")
 
@@ -150,8 +146,10 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else:
         for meme in memes:
             try:
-                keyboard = InlineKeyboardMarkup([[ InlineKeyboardButton("👍", callback_data="aprove:::YES:::"+meme['file_name'])], [InlineKeyboardButton("👎", callback_data="aprove:::NO:::"+meme['file_name']) ]])
-
+                keyboard = InlineKeyboardMarkup([
+                    [ InlineKeyboardButton("👍", callback_data="aprove::YES::"+meme['file_name']) ], 
+                    [ InlineKeyboardButton("👎", callback_data="aprove::NO::"+meme['file_name']) ]
+                    ])
 
                 if meme["isvideo"]:
                     await update.message.reply_text(f"From: {meme['account']}  likes: {meme['likes']}  views: {meme['views']} ")
