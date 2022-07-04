@@ -98,7 +98,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
         await aprove(update, context)
 
-    elif response == "new_meme":
+    elif data[0] == "new_meme":
 
         username = data[1]
 
