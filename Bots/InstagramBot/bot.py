@@ -39,13 +39,7 @@ async def bot_selected(update, context):
         return bots_selected[update.effective_chat.id]
     except:
         await select_bot(update, context)
-        while True:
-            try:
-                return bots_selected[update.effective_chat.id]
-            except Exception as e:
-                print(e)
-                time.sleep(0.1)
-
+        return False
 async def memes_unchecked(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     unchecked = send_c("get_memes_to_aprove")
 
