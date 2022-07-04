@@ -39,8 +39,11 @@ async def bot_selected(update, context):
         return bots_selected[update.effective_chat.id]
     except:
         await select_bot(update, context)
-        return False
-    
+        while True:
+            try:
+                return bots_selected[update.effective_chat.id]
+            except:
+                pass
 
 async def memes_unchecked(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     unchecked = send_c("get_memes_to_aprove")
@@ -164,6 +167,11 @@ async def select_bot(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
 
     await update.message.reply_text("Bots:", reply_markup=keyboard)
 
+
+async def selected(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    sel = await bot_selected(update, context)
+
+    await update.message.reply_text(sel)
 
 async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     last_scan = time.time()
