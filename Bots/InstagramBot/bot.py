@@ -8,6 +8,8 @@ MEMES_LOCATION = "/var/www/html/Apis/InstagramBot/Content/Memes/"
 
 available_commands = []
 
+bots_selected = {}
+
 def send_c(c, args="", j=False):
     url = f"http://192.168.1.104:8080/Apis/InstagramBot/?c={c}"+args
     print(url)
@@ -31,6 +33,14 @@ def get_bots_available():
         if b["status_code"] == 2:
             bots.append(b)
     return bots
+
+async def bot_selected(update, context):
+    try:
+        return bots_selected[update.effective_chat.id]
+    except:
+        await select_bot(update, context)
+        return False
+    
 
 async def memes_unchecked(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     unchecked = send_c("get_memes_to_aprove")
@@ -106,6 +116,10 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
         await update.effective_message.reply_text(send_c("new_meme", args=f"&username={username}", j=False))
 
+    elif data[0] == "select":
+        bots_selected[update.effective_chat.id] = data[1] 
+
+        await update.effective_message.reply_text("Selected bot", data[1])
 
 async def new_account(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if len(context.args) > 0:
@@ -131,7 +145,7 @@ async def new_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     await update.message.reply_text("Select a bot:", reply_markup=keyboard)
 
-async def bots(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def select_bot(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keys = []
 
     lans = {"es/Sp":"🇪🇸", "es/Ar":"🇦🇷", "en/En":"🇬🇧"}
@@ -143,7 +157,7 @@ async def bots(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         if bot["logged"]:
             status = "🟢"
 
-        bot_keys.append(InlineKeyboardButton(f"{status} {bot['username']} {lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data="asd"))
+        bot_keys.append(InlineKeyboardButton(f"{status} {bot['username']} {lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=f"select::{bot['username']}"))
         keys.append(bot_keys)
 
     keyboard = InlineKeyboardMarkup(keys)
@@ -208,7 +222,7 @@ app.add_handler(add_c("new_meme", new_meme))
 app.add_handler(add_c("memes_unchecked", memes_unchecked))
 app.add_handler(add_c("memes_checked", memes_checked))
 app.add_handler(add_c("new_a", new_account))
-app.add_handler(add_c("bots", bots))
+app.add_handler(add_c("select_bot", select_bot))
 app.add_handler(CallbackQueryHandler(button))
 print("Starting")
 app.run_polling()
