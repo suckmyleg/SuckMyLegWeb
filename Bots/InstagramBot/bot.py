@@ -88,7 +88,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     data = query.data.split("::")
 
-    if data[0] == "aprove":
+    if data[0] == "a":
         if data[1] == "YES":
             await update.effective_message.reply_text(send_c("aprove_meme", args=f"&file_name={data[2]}"))
         else:
@@ -146,10 +146,10 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else:
         for meme in memes:
             try:
-                print("k", meme['file_name'], f"aprove::NO::{meme['file_name']}")
+                print("k", meme['file_name'], f"a::NO::{meme['file_name']}")
                 keyboard = InlineKeyboardMarkup([
-                    [ InlineKeyboardButton("👍", callback_data=f"aprove::YES::{meme['file_name']}") ], 
-                    [ InlineKeyboardButton("👎", callback_data=f"aprove::NO::{meme['file_name']}") ]
+                    [ InlineKeyboardButton("👍", callback_data=f"a::YES::{meme['file_name']}") ], 
+                    [ InlineKeyboardButton("👎", callback_data=f"a::NO::{meme['file_name']}") ]
                     ])
 
                 print("c")
