@@ -108,7 +108,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
         await update.effective_message.reply_text("Uploading")
 
-        await update.effective_message.reply_text(send_c("new_meme", args=f"&username={username}", j=True))
+        await update.effective_message.reply_text(send_c("new_meme", args=f"&username={username}", j=False))
 
 
 async def new_account(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
