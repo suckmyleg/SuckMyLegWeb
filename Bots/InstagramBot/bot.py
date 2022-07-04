@@ -24,6 +24,14 @@ def send_c(c, args="", j=False):
     except:
         return r
 
+def get_bots_available():
+    bots = []
+
+    for b in send_c("info_account"):
+        if b["status_code"] == 2:
+            bots.append(b)
+    return bots
+
 async def memes_unchecked(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     unchecked = send_c("get_memes_to_aprove")
 
@@ -80,14 +88,28 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     data = query.data.split(":::")
 
-    if data[0] == "YES":
-        await update.effective_message.reply_text(send_c("aprove_meme", args=f"&file_name={data[1]}"))
-    else:
-        await update.effective_message.reply_text(send_c("disaprove_meme", args=f"&file_name={data[1]}"))
+    response = data[0]
 
-    update.message = update.effective_message
+    del data[0]
 
-    await aprove(update, context)
+    if response == "aprove":
+        if data[0] == "YES":
+            await update.effective_message.reply_text(send_c("aprove_meme", args=f"&file_name={data[1]}"))
+        else:
+            await update.effective_message.reply_text(send_c("disaprove_meme", args=f"&file_name={data[1]}"))
+
+        update.message = update.effective_message
+
+        await aprove(update, context)
+
+    elif response == "new_meme":
+
+        username = data[0]
+
+        await update.effective_message.reply_text("Uploading")
+
+        await update.effective_message.reply_text(send_c("new_meme", args=f"&username={username}", j=True))
+
 
 async def new_account(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if len(context.args) > 0:
@@ -102,11 +124,16 @@ async def new_account(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 
 
 async def new_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    username = "timordius"
+    keys = []
 
-    await update.message.reply_text("Uploading")
+    lans = {"es/Sp":"🇪🇸", "es/Ar":"🇦🇷", "en/En":"🇬🇧"}
 
-    await update.message.reply_text(send_c("new_meme", args=f"&username={username}", j=True))
+    for bot in get_bots_available():
+        keyboard.append([InlineKeyboardButton(f"🤖 {bot['username']} {lans[bot['lan']]}", callback_data="new_meme:::"+bot['username'])])
+
+    keyboard = InlineKeyboardMarkup(keys)
+
+    await update.message.reply_text("Select a bot:", reply_markup=keyboard)
 
 async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     last_scan = time.time()
@@ -123,7 +150,7 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else:
         for meme in memes:
             try:
-                keyboard = InlineKeyboardMarkup([[ InlineKeyboardButton("👍", callback_data="YES:::"+meme['file_name'])], [InlineKeyboardButton("👎", callback_data="NO:::"+meme['file_name']) ]])
+                keyboard = InlineKeyboardMarkup([[ InlineKeyboardButton("👍", callback_data="aprove:::YES:::"+meme['file_name'])], [InlineKeyboardButton("👎", callback_data="aprove:::NO:::"+meme['file_name']) ]])
 
 
                 if meme["isvideo"]:
