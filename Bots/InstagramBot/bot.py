@@ -158,7 +158,7 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     await update.message.reply_text(f"From: {meme['account']}  likes: {meme['likes']}  views: {meme['views']} ")
                     await context.bot.send_photo(chat_id=update.effective_chat.id, photo=requests.get(meme["url"]).content, reply_markup=keyboard)
             except Exception as e:
-                await update.message.reply_text(str(e), json.dumps(meme))
+                await update.message.reply_text(f"{str(e)} {json.dumps(meme)}")
                 print(e)
             else:
                 return None
