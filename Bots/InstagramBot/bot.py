@@ -125,7 +125,7 @@ async def new_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     lans = {"es/Sp":"🇪🇸", "es/Ar":"🇦🇷", "en/En":"🇬🇧"}
 
     for bot in get_bots_available():
-        keys.append([InlineKeyboardButton(f"🤖 {bot['username']} {lans[bot['lan']]}", callback_data="new_meme:::"+bot['username'])])
+        keys.append([InlineKeyboardButton(f"🤖 {bot['username']} {lans[bot['lan']]}", callback_data=f"new_meme:::{bot['username']}")])
 
     keyboard = InlineKeyboardMarkup(keys)
 
@@ -147,8 +147,8 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         for meme in memes:
             try:
                 keyboard = InlineKeyboardMarkup([
-                    [ InlineKeyboardButton("👍", callback_data="aprove::YES::"+meme['file_name']) ], 
-                    [ InlineKeyboardButton("👎", callback_data="aprove::NO::"+meme['file_name']) ]
+                    [ InlineKeyboardButton("👍", callback_data=f"aprove::YES::{meme['file_name']}") ], 
+                    [ InlineKeyboardButton("👎", callback_data=f"aprove::NO::{meme['file_name']}") ]
                     ])
 
                 if meme["isvideo"]:
@@ -158,7 +158,7 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     await update.message.reply_text(f"From: {meme['account']}  likes: {meme['likes']}  views: {meme['views']} ")
                     await context.bot.send_photo(chat_id=update.effective_chat.id, photo=requests.get(meme["url"]).content, reply_markup=keyboard)
             except Exception as e:
-                await update.message.reply_text(str(e))
+                await update.message.reply_text(str(e), meme)
                 print(e)
             else:
                 return None
