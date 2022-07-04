@@ -146,7 +146,7 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else:
         for meme in memes:
             try:
-                print("k")
+                print("k", meme['file_name'], f"aprove::NO::{meme['file_name']}")
                 keyboard = InlineKeyboardMarkup([
                     [ InlineKeyboardButton("👍", callback_data=f"aprove::YES::{meme['file_name']}") ], 
                     [ InlineKeyboardButton("👎", callback_data=f"aprove::NO::{meme['file_name']}") ]
