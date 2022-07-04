@@ -146,15 +146,18 @@ async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else:
         for meme in memes:
             try:
+                print("k")
                 keyboard = InlineKeyboardMarkup([
                     [ InlineKeyboardButton("👍", callback_data=f"aprove::YES::{meme['file_name']}") ], 
                     [ InlineKeyboardButton("👎", callback_data=f"aprove::NO::{meme['file_name']}") ]
                     ])
 
+                print("c")
                 if meme["isvideo"]:
                     await update.message.reply_text(f"From: {meme['account']}  likes: {meme['likes']}  views: {meme['views']} ")
                     await update.message.reply_text(meme["url"], reply_markup=keyboard)
                 else:
+                    print("i")
                     await update.message.reply_text(f"From: {meme['account']}  likes: {meme['likes']}  views: {meme['views']} ")
                     await context.bot.send_photo(chat_id=update.effective_chat.id, photo=requests.get(meme["url"]).content, reply_markup=keyboard)
             except Exception as e:
