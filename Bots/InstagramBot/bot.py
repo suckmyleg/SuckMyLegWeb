@@ -131,6 +131,22 @@ async def new_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     await update.message.reply_text("Select a bot:", reply_markup=keyboard)
 
+async def bots(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    keys = []
+
+    lans = {"es/Sp":"🇪🇸", "es/Ar":"🇦🇷", "en/En":"🇬🇧"}
+
+    for bot in get_bots_available():
+        bot_keys = []
+
+        bot_keys.append([InlineKeyboardButton(f"🤖{bot['username']}{lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=f"new_meme::{bot['username']}")])
+        bot_keys.append([InlineKeyboardButton(f"🤖{bot['username']}{lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=f"new_meme::{bot['username']}")])
+        bot_keys.append([InlineKeyboardButton(f"🤖{bot['username']}{lans[bot['lan']]} {time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=f"new_meme::{bot['username']}")])
+        keys.append(bot_keys)
+
+    keyboard = InlineKeyboardMarkup(keys)
+
+
 async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     last_scan = time.time()
 
@@ -188,6 +204,7 @@ app.add_handler(add_c("new_meme", new_meme))
 app.add_handler(add_c("memes_unchecked", memes_unchecked))
 app.add_handler(add_c("memes_checked", memes_checked))
 app.add_handler(add_c("new_a", new_account))
+app.add_handler(add_c("bots", bots))
 app.add_handler(CallbackQueryHandler(button))
 print("Starting")
 app.run_polling()
