@@ -226,6 +226,7 @@ app.add_handler(add_c("download_memes", download_memes))
 app.add_handler(add_c("help", hel))
 app.add_handler(add_c("aprove", aprove))
 app.add_handler(add_c("new_meme", new_meme))
+app.add_handler(add_c("selected", selected))
 
 app.add_handler(add_c("memes_unchecked", memes_unchecked))
 app.add_handler(add_c("memes_checked", memes_checked))
