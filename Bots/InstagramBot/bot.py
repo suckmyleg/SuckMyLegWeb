@@ -146,6 +146,8 @@ async def bots(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     keyboard = InlineKeyboardMarkup(keys)
 
+    await update.message.reply_text("Bots:", reply_markup=keyboard)
+
 
 async def aprove(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     last_scan = time.time()
