@@ -129,7 +129,7 @@ async def new_meme(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     lans = {"es/Sp":"🇪🇸", "es/Ar":"🇦🇷", "en/En":"🇬🇧"}
 
     for bot in get_bots_available():
-        keyboard.append([InlineKeyboardButton(f"🤖 {bot['username']} {lans[bot['lan']]}", callback_data="new_meme:::"+bot['username'])])
+        keys.append([InlineKeyboardButton(f"🤖 {bot['username']} {lans[bot['lan']]}", callback_data="new_meme:::"+bot['username'])])
 
     keyboard = InlineKeyboardMarkup(keys)
 
