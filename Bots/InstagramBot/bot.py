@@ -119,7 +119,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     elif data[0] == "select":
         bots_selected[update.effective_chat.id] = data[1] 
 
-        await update.effective_message.reply_text("Selected bot", data[1])
+        await update.effective_message.reply_text(f"Selected bot {data[1]}")
 
 async def new_account(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if len(context.args) > 0:
