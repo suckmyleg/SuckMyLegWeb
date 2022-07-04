@@ -145,7 +145,7 @@ async def bots(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
         bot_keys.append(InlineKeyboardButton(f"{status} {bot['username']} {lans[bot['lan']]}", callback_data=""))
         bot_keys.append(InlineKeyboardButton(f"new_meme", callback_data=f"new_meme::{bot['username']}"))
-        bot_keys.append(InlineKeyboardButton(f"{time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}"), callback_data="")
+        bot_keys.append(InlineKeyboardButton(f"{time.strftime('%H:%M:%S', time.gmtime(int(time.time()-bot['last_publish'])))}", callback_data=""))
         keys.append(bot_keys)
 
     keyboard = InlineKeyboardMarkup(keys)
