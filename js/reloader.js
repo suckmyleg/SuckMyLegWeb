@@ -57,6 +57,29 @@ function make_call(mod, args="")
     }
 }
 
+// https://livecodestream.dev/post/5-ways-to-make-http-requests-in-javascript/
+function make_call_str(mod, args="")
+{
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://"+window.location.host.split(":")[0]+":8080/Apis/"+mod+"/?"+args);
+    xhr.send();
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        data = xhr.responseText;
+        return data;
+      } else if (xhr.status === 404) {
+        console.log("No records found");
+        return "404";
+      }
+    }
+    xhr.onerror = function() {
+      console.log("Network error occurred");
+      return "Network error ocurred";
+    }
+    xhr.onprogress = function(e) {
+    }
+}
+
 function safe_reload(mod, on_load, args="")
 {
 
