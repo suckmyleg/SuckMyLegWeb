@@ -58,7 +58,7 @@ function make_call(mod, args="")
 }
 
 // https://livecodestream.dev/post/5-ways-to-make-http-requests-in-javascript/
-function make_call_str(mod, args="")
+function make_call_str_return(mod, args="")
 {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "http://"+window.location.host.split(":")[0]+":8080/Apis/"+mod+"/?"+args);
