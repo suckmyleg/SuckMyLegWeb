@@ -186,7 +186,7 @@ p.tank{
 
 #active_threads{
 	position: fixed;
-	border: 2px solid black;
+	border: 2px solid white;
 	border-radius: 5px;
 	padding: 10px;
 	bottom: 200px;
