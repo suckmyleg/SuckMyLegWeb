@@ -183,3 +183,12 @@ p.tank{
 	bottom: 0px;
 	left: 0px;
 }
+
+#active_threads{
+	position: fixed;
+	border: 2px solid black;
+	border-radius: 5px;
+	padding: 10px;
+	bottom: 0px;
+	right: 0px;
+}
